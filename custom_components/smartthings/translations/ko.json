@@ -1,7 +1,7 @@
 {
     "config": {
         "abort": {
-            "invalid_webhook_url": "Home Assistant\uac00 SmartThings\uc5d0\uc11c \uc5c5\ub370\uc774\ud2b8\ub97c \uc218\uc2e0\ud558\ub3c4\ub85d \uc62c\ubc14\ub974\uac8c \uad6c\uc131\ub418\uc9c0 \uc54a\uc558\uc2b5\ub2c8\ub2e4. \uc6f9 \ud6c5 URL\uc774 \uc798\ubabb\ub418\uc5c8\uc2b5\ub2c8\ub2e4:\n> {webhook_url} \n\n[\uc548\ub0b4]({component_url})\ub97c \ucc38\uace0\ud558\uc5ec \uad6c\uc131\uc744 \uc5c5\ub370\uc774\ud2b8\ud558\uace0 Home Assistant\ub97c \ub2e4\uc2dc \uc2dc\uc791\ud55c \ud6c4 \ub2e4\uc2dc \uc2dc\ub3c4\ud574\uc8fc\uc138\uc694.",
+            "invalid_webhook_url": "Home Assistant \uac00 SmartThings\uc5d0\uc11c \uc5c5\ub370\uc774\ud2b8\ub97c \uc218\uc2e0\ud558\ub3c4\ub85d \uc62c\ubc14\ub974\uac8c \uad6c\uc131\ub418\uc9c0 \uc54a\uc558\uc2b5\ub2c8\ub2e4. \uc6f9 \ud6c5 URL\uc774 \uc798\ubabb\ub418\uc5c8\uc2b5\ub2c8\ub2e4:\n> {webhook_url} \n\n[\uc548\ub0b4]({component_url})\ub97c \ucc38\uace0\ud558\uc5ec \uad6c\uc131\uc744 \uc5c5\ub370\uc774\ud2b8\ud558\uace0 Home Assistant\ub97c \ub2e4\uc2dc \uc2dc\uc791\ud55c \ud6c4 \ub2e4\uc2dc \uc2dc\ub3c4\ud574\uc8fc\uc138\uc694.",
             "no_available_locations": "Home Assistant\uc5d0\uc11c \uc124\uc815\ud560 \uc218 \uc788\ub294 SmartThings \uc704\uce58\uac00 \uc5c6\uc2b5\ub2c8\ub2e4."
         },
         "error": {
@@ -32,6 +32,18 @@
             "user": {
                 "description": "SmartThings\ub294 \uc544\ub798\uc758 \uc6f9 \ud6c5 \uc8fc\uc18c\ub85c Home Assistant\uc5d0 \ud478\uc2dc \uc5c5\ub370\uc774\ud2b8\ub97c \ubcf4\ub0b4\ub3c4\ub85d \uad6c\uc131\ub429\ub2c8\ub2e4. \n > {webhook_url} \n\n\uc774 \uad6c\uc131\uc774 \uc62c\ubc14\ub974\uc9c0 \uc54a\ub2e4\uba74 \uad6c\uc131\uc744 \uc5c5\ub370\uc774\ud2b8\ud558\uace0 Home Assistant\ub97c \ub2e4\uc2dc \uc2dc\uc791\ud55c \ud6c4 \ub2e4\uc2dc \uc2dc\ub3c4\ud574\uc8fc\uc138\uc694.",
                 "title": "\ucf5c\ubc31 URL \ud655\uc778\ud558\uae30"
+            }
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "SmartThings Customize \uad6c\uc131\u0020\uc124\uc815",
+                "data": {
+                    "enable_default_entities": "\uae30\ubcf8\u0020\uc5d4\ud2f0\ud2f0\u0020\ud65c\uc131\ud654",
+                    "enable_syntax_property": "\uc18d\uc131\uc5d0\u0020\uc124\uc815\u0020\uad6c\ubb38\u0020\ud45c\uc2dc",
+                    "resetting_entities": "\uc5d4\ud2f0\ud2f0\u0020\uc7ac\uc124\uc815\u0028\ucd08\uae30\ud654\u0029"
+                }
             }
         }
     }

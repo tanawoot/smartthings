@@ -2,13 +2,20 @@
 from __future__ import annotations
 
 from collections.abc import Sequence
+from typing import Any
 
-from pysmartthings import Attribute, Capability
+from .pysmartthings import Attribute, Capability
 
 from homeassistant.components.lock import LockEntity
+from homeassistant.config_entries import ConfigEntry
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from . import SmartThingsEntity
-from .const import DATA_BROKERS, DOMAIN
+from .common import *
+
+import logging
+_LOGGER = logging.getLogger(__name__)
+
 
 ST_STATE_LOCKED = "locked"
 ST_LOCK_ATTR_MAP = {
@@ -20,17 +27,31 @@ ST_LOCK_ATTR_MAP = {
     "usedCode": "used_code",
 }
 
+from .lock_custom import SmartThingsLock_custom
 
-async def async_setup_entry(hass, config_entry, async_add_entities):
+async def async_setup_entry(
+    hass: HomeAssistant,
+    config_entry: ConfigEntry,
+    async_add_entities: AddEntitiesCallback,
+) -> None:
     """Add locks for a config entry."""
     broker = hass.data[DOMAIN][DATA_BROKERS][config_entry.entry_id]
-    async_add_entities(
-        [
-            SmartThingsLock(device)
-            for device in broker.devices.values()
-            if broker.any_assigned(device.device_id, "lock")
-        ]
-    )
+    entities = []
+    if SettingManager.enable_default_entities():
+        async_add_entities(
+            [
+                SmartThingsLock(device)
+                for device in broker.devices.values()
+                if broker.any_assigned(device.device_id, "lock") and SettingManager.allow_device(device.device_id)
+            ]
+        )
+
+    settings = SettingManager.get_capa_settings(broker, Platform.LOCK)
+    for s in settings:
+        _LOGGER.debug("cap setting : " + str(s[1]))
+        entities.append(SmartThingsLock_custom(hass=hass, setting=s))
+
+    async_add_entities(entities)
 
 
 def get_capabilities(capabilities: Sequence[str]) -> Sequence[str] | None:
@@ -43,23 +64,23 @@ def get_capabilities(capabilities: Sequence[str]) -> Sequence[str] | None:
 class SmartThingsLock(SmartThingsEntity, LockEntity):
     """Define a SmartThings lock."""
 
-    async def async_lock(self, **kwargs):
+    async def async_lock(self, **kwargs: Any) -> None:
         """Lock the device."""
         await self._device.lock(set_status=True)
         self.async_write_ha_state()
 
-    async def async_unlock(self, **kwargs):
+    async def async_unlock(self, **kwargs: Any) -> None:
         """Unlock the device."""
         await self._device.unlock(set_status=True)
         self.async_write_ha_state()
 
     @property
-    def is_locked(self):
+    def is_locked(self) -> bool:
         """Return true if lock is locked."""
         return self._device.status.lock == ST_STATE_LOCKED
 
     @property
-    def extra_state_attributes(self):
+    def extra_state_attributes(self) -> dict[str, Any]:
         """Return device specific state attributes."""
         state_attrs = {}
         status = self._device.status.attributes[Attribute.lock]
