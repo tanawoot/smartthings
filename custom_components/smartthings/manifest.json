@@ -1,35 +1,16 @@
 {
-  "domain": "smartthings",
-  "name": "SmartThings",
+  "domain": "smartthings_customize",
+  "name": "SmartThings Customize",
   "config_flow": true,
-  "documentation": "https://www.home-assistant.io/integrations/smartthings",
-  "issue_tracker": "https://github.com/veista/smartthings/issues",
-  "requirements": ["pysmartapp==0.3.3", "pysmartthings==0.7.6", "httpsig==1.3.0", "setuptools==80.9.0"],
-  "dependencies": ["webhook"],
-  "after_dependencies": ["cloud"],
-  "codeowners": ["@andrewsayre", "@veista"],
+  "documentation": "https://github.com/oukene/smartthings_customize",
+  "requirements": [],
+  "ssdp": [],
+  "zeroconf": [],
+  "homekit": {},
+  "dependencies": [],
+  "codeowners": [
+    "@oukene"
+  ],
   "iot_class": "cloud_push",
-  "version": "1.1.17",
-  "dhcp": [
-    {
-      "hostname": "st*",
-      "macaddress": "24FD5B*"
-    },
-    {
-      "hostname": "smartthings*",
-      "macaddress": "24FD5B*"
-    },
-    {
-      "hostname": "hub*",
-      "macaddress": "24FD5B*"
-    },
-    {
-      "hostname": "hub*",
-      "macaddress": "D052A8*"
-    },
-    {
-      "hostname": "hub*",
-      "macaddress": "286D97*"
-    }
-  ]
+  "version": "2025.6.0"
 }
